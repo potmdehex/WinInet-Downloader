@@ -9,3 +9,4 @@ void *downs_memset(void *s, int c, unsigned int n);
 unsigned int downs_fltoui(float fval);
 
 #endif
+

@@ -10,3 +10,4 @@ int update_dialog_cb(int read_bytes, int total_bytes);
 BOOL CALLBACK DownloadDlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 #endif
+

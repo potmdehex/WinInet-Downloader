@@ -71,3 +71,4 @@ unsigned int downs_fltoui(float fval)
     fi.f += 3 << 22;
     return ((fi.i) & 0x007fffff) - 0x00400000;
 }
+

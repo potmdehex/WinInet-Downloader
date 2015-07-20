@@ -18,3 +18,4 @@ void comctl_init(void)
     icc.dwICC = ICC_PROGRESS_CLASS | ICC_WIN95_CLASSES;
     __InitCommonControlsEx(&icc);
 }
+

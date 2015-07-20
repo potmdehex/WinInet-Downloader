@@ -6,3 +6,4 @@
 void comctl_init(void);
 
 #endif
+
