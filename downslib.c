@@ -1,6 +1,5 @@
-/* Created by John Åkerblom 10/26/2014 */
+/* Created by John Ã…kerblom 10/26/2014 */
 
-#include "downslib.h"
 #include "downslib.h"
 #include "wininet_defs.h"
 
