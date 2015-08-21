@@ -197,13 +197,6 @@ static int _download(const char *url,
         goto cleanup;
     }
 
-    dwFlags = INTERNET_FLAG_RELOAD;
-    if (use_ssl) {
-        dwFlags |= INTERNET_FLAG_SECURE;
-        dwFlags |= INTERNET_FLAG_IGNORE_CERT_DATE_INVALID;
-        dwFlags |= INTERNET_FLAG_IGNORE_CERT_CN_INVALID;
-    }
-
     while (__InternetReadFile(hUrl, buffer, sizeof(buffer), &dwRead)) {        
         read_bytes += dwRead;
 
