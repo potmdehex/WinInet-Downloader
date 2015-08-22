@@ -291,7 +291,7 @@ int downslib_download(const char *url,
     char *host = NULL;
     int ret = 0;
 
-    ret = host_and_object_from_url(url, &host, &object);
+    ret = _host_and_object_from_url(url, &host, &object);
     if (ret != 0) {
         return ret;
     }
