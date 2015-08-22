@@ -161,7 +161,7 @@ static int _download(const char *url,
     char buffer[2048];
     int ret = 0;
     
-    /* Try to retrieve content-length, not essential*/
+    /* Try to retrieve content-length, not essential */
     _get_content_length(host, 
                         object, 
                         use_ssl, 
@@ -219,7 +219,7 @@ static int _download(const char *url,
             }
         }
         
-        /* Exit if nothing more to read*/
+        /* Exit if nothing more to read */
         if (dwRead == 0) {
             break;
         }
