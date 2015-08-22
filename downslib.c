@@ -244,16 +244,21 @@ cleanup:
     return ret;
 }
 
-void host_and_object_from_url(const char *url, char **host, const char **object)
+static int _host_and_object_from_url(const char *url, char **host, const char **object)
 {
     const char *object_tmp = _path_from_url(url);
     char *past_protocol = NULL;
     char *host_tmp = NULL;
     int ret = 0;
-    SIZE_T len = 0;
+    int len = 0;
 
-    /* No error checking, enjoy your crash */
-    past_protocol = _strchr(url, '/') + 2;
+    // Point past the protocol part of URL, e.g past "HTTP://"
+    past_protocol = _strchr(url, '/');
+    if (past_protocol == NULL) {
+        // Malformed url
+        return 1;
+    }
+    past_protocol += 2; // Move past the two slashes in protocol specification
 
     if (object_tmp == NULL) {
         len = lstrlenA(past_protocol) + 1;
@@ -262,11 +267,18 @@ void host_and_object_from_url(const char *url, char **host, const char **object)
         len = object_tmp - past_protocol + 1;
     }
     
-    host_tmp = (LPVOID)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, len+1);
+    host_tmp = (LPVOID)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, len + 1);
     lstrcpynA(host_tmp, past_protocol, len);
 
     *host = host_tmp;
     *object = object_tmp;
+
+    return 0;
+}
+
+static void _free_host(char *host)
+{
+    HeapFree(GetProcessHeap(), 0, host);
 }
 
 int downslib_download(const char *url,
@@ -280,7 +292,10 @@ int downslib_download(const char *url,
     char *host = NULL;
     int ret = 0;
 
-    host_and_object_from_url(url, &host, &object);
+    ret = host_and_object_from_url(url, &host, &object);
+    if (ret != 0) {
+        return ret;
+    }
 
     ret = _download(url,
                     host, 
@@ -291,7 +306,7 @@ int downslib_download(const char *url,
                     DEFAULT_TIMEOUT, 
                     cb);
 
-    HeapFree(GetProcessHeap(), 0, host);
+    _free_host(host);
 
     return ret;
 }
