@@ -1,4 +1,4 @@
-/* Created by John Åkerblom 10/26/2014 */
+/* Created by John Ã…kerblom 10/26/2014 */
 
 #include "downslib.h"
 #include "wininet_defs.h"
@@ -195,13 +195,6 @@ static int _download(const char *url,
     if (hFile == NULL) {
         ret = 3;
         goto cleanup;
-    }
-
-    dwFlags = INTERNET_FLAG_RELOAD;
-    if (use_ssl) {
-        dwFlags |= INTERNET_FLAG_SECURE;
-        dwFlags |= INTERNET_FLAG_IGNORE_CERT_DATE_INVALID;
-        dwFlags |= INTERNET_FLAG_IGNORE_CERT_CN_INVALID;
     }
 
     while (__InternetReadFile(hUrl, buffer, sizeof(buffer), &dwRead)) {        
