@@ -294,8 +294,8 @@ int downslib_download(const char *url,
                     object, 
                     use_ssl, 
                     filename, 
-                    DEFAULT_USERAGENT, 
-                    DEFAULT_TIMEOUT, 
+                    useragent? useragent : DEFAULT_USERAGENT, 
+                    timeout? timeout : DEFAULT_TIMEOUT, 
                     cb);
 
     _free_host(host);
