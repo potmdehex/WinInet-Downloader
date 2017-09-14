@@ -259,7 +259,7 @@ static int _host_and_object_from_url(const char *url, char **host, const char **
         len = object_tmp - past_protocol + 1;
     }
     
-    host_tmp = (LPVOID)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, len + 1);
+    host_tmp = (char *)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, len + 1);
     lstrcpynA(host_tmp, past_protocol, len);
 
     *host = host_tmp;
